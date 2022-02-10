@@ -1,0 +1,9 @@
+name: Smile Test
+description: My first custom module
+package: custom
+type: module
+
+core_version_requirement: 9.x
+
+
+

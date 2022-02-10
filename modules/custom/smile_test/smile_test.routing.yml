@@ -1,0 +1,7 @@
+drupal2022.smile_test:
+  path: '/smile-test'
+  defaults:
+    _controller: '\Drupal\smile_test\Controller\SmileTest::content'
+    _title: 'It is my first route ever'
+  requirements:
+    _permission: 'access content'
