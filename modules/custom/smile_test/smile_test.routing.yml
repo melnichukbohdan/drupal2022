@@ -11,5 +11,5 @@ drupal2022.node_render:
   defaults:
     _controller: '\Drupal\smile_test\Controller\SmileTest::nodeRender'
   requirements:
-    _permission: 'access content'
+    _permission: '\Drupal\smile_test\Controller\SmileTest::access'
     nid: \d+
