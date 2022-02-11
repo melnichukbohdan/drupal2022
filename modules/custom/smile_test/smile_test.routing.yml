@@ -5,3 +5,11 @@ drupal2022.smile_test:
     _title: 'It is my first route ever'
   requirements:
     _permission: 'access content'
+
+drupal2022.node_render:
+  path: '/smile-test/node-render/{nid}'
+  defaults:
+    _controller: '\Drupal\smile_test\Controller\SmileTest::nodeRender'
+  requirements:
+    _permission: 'access content'
+    nid: \d+
