@@ -1,0 +1,9 @@
+drupal2022.smile_test:
+  title: Smile Test
+  discription: link menu Smile Test
+  route_name: drupal2022.smile_test
+  menu_name: Tools
+  weight: -2
+  options:
+    attributes:
+      target: _blank
