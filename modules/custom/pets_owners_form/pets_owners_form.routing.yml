@@ -1,0 +1,7 @@
+drupal2022.pets_owners_form:
+  path: '/pets_owners_form'
+  defaults:
+    _form: '\Drupal\pets_owners_form\Form\PetsOwnersForm'
+    _title: 'Pets Owners Form'
+  requirements:
+    _permission: 'access content'

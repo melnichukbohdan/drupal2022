@@ -1,0 +1,9 @@
+drupal2022.pets_owners_form:
+  title: Pets Owners Form
+  discription: link menu Pets Owners Form
+  route_name: drupal2022.pets_owners_form
+  menu_name: main
+  weight: 1
+  options:
+    attributes:
+      target: _self

@@ -1,0 +1,5 @@
+name: Pets Owners Form
+type: module
+description: example druoal form
+package: custom
+core_version_requirement: 9.x
