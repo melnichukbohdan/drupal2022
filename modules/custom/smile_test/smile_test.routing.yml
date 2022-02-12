@@ -4,12 +4,12 @@ drupal2022.smile_test:
     _controller: '\Drupal\smile_test\Controller\SmileTest::content'
     _title: 'It is my first route ever'
   requirements:
-    _permission: 'access content'
+    _permission: 'authenticated_user'
 
 drupal2022.node_render:
   path: '/smile-test/node-render/{nid}'
   defaults:
     _controller: '\Drupal\smile_test\Controller\SmileTest::nodeRender'
   requirements:
-    _permission: '\Drupal\smile_test\Controller\SmileTest::access'
+    _custom_access: '\Drupal\smile_test\Controller\SmileTest::accessDrupalSuperUser'
     nid: \d+

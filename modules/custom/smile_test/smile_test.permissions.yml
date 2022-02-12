@@ -1,0 +1,11 @@
+authenticated_user:
+  title: Authenticated user
+  description: 'Access for authenticated user'
+
+drupal_superuser:
+  title: Drupal Superuser
+  description: 'Access for Drupal Superuser'
+
+anonymous_user:
+  title: Anonymous user
+  description: 'Access anonymous user'

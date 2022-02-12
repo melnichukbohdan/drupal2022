@@ -5,9 +5,12 @@
  * Contains \Drupal\smile-test\Controller\SmileTest
  */
 
+
+
 namespace Drupal\smile_test\Controller;
 
-
+use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Session\AccountInterface;
 /*
  * Provide route for my custom routs
  */
@@ -43,4 +46,16 @@ class SmileTest {
       return ['#markup' => '<h2>Node does not exist :(</h2>'];
 
   }
+
+/*
+ *  this method check user permission
+ if user have permission 'drupal_superuser' displays node
+ if user don't have permission displays message 'access denied
+ */
+  public function accessDrupalSuperUser(AccountInterface $account) {
+    return AccessResult::allowedIf($account
+      ->hasPermission('drupal_superuser'));
+  }
+
+
 }
