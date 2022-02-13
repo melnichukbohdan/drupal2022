@@ -25,8 +25,9 @@ class PetsOwnersForm extends FormBase {
     $form['name'] = [
       '#type' => 'textfield',
       '#title' => 'Name',
-    //  '#required' => TRUE
+      '#required' => TRUE
     ];
+
       //gender (radios: male, female, unknown)
     $form['settings']['active'] = [
       '#type' => 'radios',
@@ -36,6 +37,7 @@ class PetsOwnersForm extends FormBase {
                      2 => 'unknown'],
       '#default_value' => 2,
     ];
+
       //prefix (dropdown: mr, mrs, ms)
     $form['prefix'] = [
       '#type' => 'select',
@@ -46,15 +48,16 @@ class PetsOwnersForm extends FormBase {
         'ms' => 'ms'
       ],
       '#empty_option' => '-select-',
-   //   '#required' => TRUE
+      '#required' => TRUE
     ];
+
       //age (text, numeric)
     $form['age'] = [
       '#type' => 'number',
       '#title' => 'Age',
-   //   '#required' => TRUE
-
+      '#required' => TRUE
     ];
+
     // parents (fieldset collapsed),  * father`s name (text in parents fieldset),
     //                                * mother`s name (text in parents fieldset),
     $form['parents'] = [
@@ -87,13 +90,15 @@ class PetsOwnersForm extends FormBase {
         ],
       ],
     ];
+
       // email (text)
     $form['email'] = [
       '#type' => 'textfield',
       '#title' => 'Email',
-   //   '#required' => TRUE
+      '#required' => TRUE
     ];
-      //buttom 'Submit'
+
+      //button 'Submit'
     $form['actions']['#type'] = 'actions';
     $form['actions']['submit'] = [
       '#type' => 'submit',
@@ -101,10 +106,12 @@ class PetsOwnersForm extends FormBase {
     ];
 
     return $form;
-
   }
 
-  public function validateForm(array &$form, FormStateInterface $form_state) {
+  /*
+   * {@Inheritdoc}
+   */
+    public function validateForm(array &$form, FormStateInterface $form_state) {
 
     // check age
     if ($form_state->getValue('age') <= 0 || $form_state->getValue('age') > 120) {
@@ -112,24 +119,25 @@ class PetsOwnersForm extends FormBase {
     }
 
     //check name
-    if (mb_strlen(trim($form_state->getValue('name'))) <= 0 || mb_strlen(trim($form_state->getValue('name'))) >= 100) {
+    if (mb_strlen(trim($form_state->getValue('name'))) <= 0 ||
+        mb_strlen(trim($form_state->getValue('name'))) >= 100) {
       $form_state->setErrorByName('name', $this->t('Enter valid name'));
     }
 
-    // checkemail
-    if (!$form_state->getValue('email') || !filter_var($form_state->getValue('email'), FILTER_VALIDATE_EMAIL)) {
+    // check email
+    if (!$form_state->getValue('email') || !filter_var($form_state->getValue('email'),
+        FILTER_VALIDATE_EMAIL)) {
       $form_state->setErrorByName('email', $this->t('Enter valid e-mail'));
     }
-
   }
 
+   /*
+   * {@Inheritdoc}
+   */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-
     $this->messenger()->addMessage($this->t('Thank you.'));
 
   }
 
-
-
-
 }
+
