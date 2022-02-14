@@ -1,0 +1,17 @@
+drupal2022.pets_owners_storage:
+  title: Pet Osowners Storage
+  description: link menu Pets Owners Storage
+  route_name: drupal2022.pets_owners_storage
+  menu_name: main
+  weight: 2
+    attributes:
+      target: _self
+
+drupal2022.pets_owners_storage_form:
+  title: Pet Osowners Storage Form
+  description:  link menu Pet Osowners Storage Form
+  route_name: drupal2022.pets_owners_storage_form
+  menu_name: main
+  weight: 3
+    attributes:
+      targer: _self

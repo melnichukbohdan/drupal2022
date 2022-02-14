@@ -1,0 +1,15 @@
+drupal2022.pets_owners_storage:
+  path: '/pets_owners_storage'
+  defaults:
+    _controller: '\Drupal\pets_owners_storage\Controller\PetsOwnersStorage::displayTable'
+    _title: 'Pets Owners Storage'
+  requirements:
+    _permision: 'access content'
+
+drupal2022.pets_owners_storage_form:
+  path: '/pets_owners_storage_form'
+  defaults:
+    _form: '\Drupal\pets_owners_storage\Form\PetsOwnersStorageForm'
+    _title: 'Pets Owners Storage Form'
+  requirements:
+    _permision: 'access content'
