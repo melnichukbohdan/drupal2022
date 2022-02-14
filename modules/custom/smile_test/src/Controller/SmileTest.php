@@ -49,8 +49,8 @@ class SmileTest {
 
 /*
  *  this method check user permission
- if user have permission 'drupal_superuser' displays node
- if user don't have permission displays message 'access denied
+ * if user have permission 'drupal_superuser' displays node
+ * if user don't have permission displays message 'access denied
  */
   public function accessDrupalSuperUser(AccountInterface $account) {
     return AccessResult::allowedIf($account

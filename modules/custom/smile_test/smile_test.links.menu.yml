@@ -1,7 +1,7 @@
-drupal2022.smile_test:
+smile_test.content:
   title: Smile Test
   discription: link menu Smile Test
-  route_name: drupal2022.smile_test
+  route_name: smile_test.content
   menu_name: Tools
   weight: -2
   options:

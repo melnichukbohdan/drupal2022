@@ -1,4 +1,4 @@
-drupal2022.smile_test:
+smile_test.content:
   path: '/smile-test'
   defaults:
     _controller: '\Drupal\smile_test\Controller\SmileTest::content'
@@ -6,7 +6,7 @@ drupal2022.smile_test:
   requirements:
     _permission: 'authenticated_user'
 
-drupal2022.node_render:
+smile_test.node_render:
   path: '/smile-test/node-render/{nid}'
   defaults:
     _controller: '\Drupal\smile_test\Controller\SmileTest::nodeRender'
