@@ -1,5 +1,5 @@
 name: Pets Owners Form
 type: module
-description: example druoal form
+description: example drupal form
 package: custom
 core_version_requirement: 9.x

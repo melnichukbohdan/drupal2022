@@ -1,4 +1,4 @@
-drupal2022.pets_owners_form:
+pets_owners_form.form:
   path: '/pets_owners_form'
   defaults:
     _form: '\Drupal\pets_owners_form\Form\PetsOwnersForm'
