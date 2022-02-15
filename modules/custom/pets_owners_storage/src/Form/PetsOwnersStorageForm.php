@@ -29,13 +29,13 @@ class PetsOwnersStorageForm extends FormBase {
     ];
 
       //gender (radios: male, female, unknown)
-    $form['settings']['active'] = [
+    $form['gender'] = [
       '#type' => 'radios',
       '#title' => 'Gender',
-      '#options' => [0 => 'male',
-                     1 => 'female',
-                     2 => 'unknown'],
-      '#default_value' => 2,
+      '#options' => ['male' => 'male',
+                     'female' => 'female',
+                     'unknown' => 'unknown'],
+      '#default_value' => 'unknown',
     ];
 
       //prefix (dropdown: mr, mrs, ms)
@@ -135,6 +135,34 @@ class PetsOwnersStorageForm extends FormBase {
    * {@Inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
+
+    // get data with form
+    $data = [
+      'name' => $form_state->getValue('name'),
+      'gender' => $form_state->getValue('gender'),
+      'prefix' => $form_state->getValue('prefix'),
+      'age' => $form_state->getValue('age'),
+      'father' => $form_state->getValue('father'),
+      'mother' => $form_state->getValue('mother'),
+      'pet_name' => $form_state->getValue('pet_name'),
+      'email' => $form_state->getValue('email'),
+    ];
+
+    $connection = \Drupal::database();
+    $transaction = $connection
+      ->startTransaction();
+    try {
+      $connection
+        ->insert('pets_owners_storage')
+        ->fields($data)
+        ->execute();
+
+    } catch (Exception $e) {
+      $transaction
+      ->rollBack();
+      watchdog_exception('type', $e);
+    }
+
     $this->messenger()->addMessage($this->t('Thank you.'));
 
   }

@@ -1,0 +1,68 @@
+<?php
+
+/**
+ * Implements hook_schema().
+ *
+ * Defines the database tables used by this module.
+ *
+ */
+function pets_owners_storage_schema() {
+  $schema['pets_owners_storage'] = [
+    'description' => 'Pets owners list',
+    'fields' => [
+      'poid' => [
+        'type' => 'serial',
+        'not null' => TRUE,
+        'description' => 'Primary Key: Unique pet owners ID.',
+      ],
+      'name' => [
+        'type' => 'varchar',
+        'length' => 100,
+        'not null' => TRUE,
+        'description' => 'Name of the pet owner.',
+      ],
+      'gender' => [
+        'type' => 'varchar',
+        'length' => 8,
+        'not null' => TRUE,
+        'description' => "Gender of the pet owner",
+      ],
+      'prefix' => [
+        'type' => 'varchar',
+        'length' => 4,
+        'not null' => TRUE,
+        'description' => "Prefix of the pet owner",
+      ],
+      'age' => [
+        'type' => 'int',
+        'length' => 4,
+        'description' => "Age of the pet owner",
+      ],
+      'father' => [
+        'type' => 'varchar',
+        'length' => 100,
+        'description' => "Father of the pet owner",
+      ],
+      'mother' => [
+        'type' => 'varchar',
+        'length' => 100,
+        'not null' => TRUE,
+        'description' => "Mother of the pet owner",
+      ],
+      'pet_name' => [
+        'type' => 'varchar',
+        'length' => 100,
+        'description' => "Name of the pet",
+      ],
+      'email' => [
+        'type' => 'varchar',
+        'length' => 50,
+        'not null' => TRUE,
+        'description' => "Email of the pets owner",
+      ],
+    ],
+    'primary key' => ['poid'],
+  ];
+
+  return $schema;
+}
