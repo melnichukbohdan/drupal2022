@@ -10,6 +10,6 @@ pets_owners_storage.table:
   path: '/pets_owners_storage'
   defaults:
     _controller: '\Drupal\pets_owners_storage\Controller\PetsOwnersStorage::displayTable'
-    _title: 'Pets Owners Storage'
+    _title: 'Pets Owners List'
   requirements:
     _permission: 'access content'
