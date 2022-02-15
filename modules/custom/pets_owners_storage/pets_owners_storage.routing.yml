@@ -13,3 +13,11 @@ pets_owners_storage.table:
     _title: 'Pets Owners List'
   requirements:
     _permission: 'access content'
+
+pets_owners_storage.delete:
+  path: '/pets_owners_storage/{id}/delete'
+  defaults:
+    _form: '\Drupal\pets_owners_storage\Form\PetsOwnersStorageDelete'
+    _title: 'Delete'
+  requirements:
+    _access: 'TRUE'
