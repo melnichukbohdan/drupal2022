@@ -36,13 +36,13 @@ class PetsOwnersStorageDelete extends ConfirmFormBase {
    * {@inheritdoc}
    */
   public function getDescription() {
-    return t('Delete data number %id ?', array('%id' => $this->id));
+    return t('Delete pet owner number %id ?', array('%id' => $this->id));
   }
   /**
    * {@inheritdoc}
    */
   public function getConfirmText() {
-    return t('Delete it!');
+    return t('Delete');
   }
 
   /**
@@ -78,5 +78,4 @@ class PetsOwnersStorageDelete extends ConfirmFormBase {
    \Drupal::messenger()->addStatus('Succesfully deleted');
    $form_state->setRedirect('pets_owners_storage.table');
   }
-
 }

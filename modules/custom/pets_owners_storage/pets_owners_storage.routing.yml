@@ -21,3 +21,11 @@ pets_owners_storage.delete:
     _title: 'Delete'
   requirements:
     _access: 'TRUE'
+
+pets_owners_storage.edit:
+  path: '/pets_owners_storage/{id}/edit'
+  defaults:
+    _title: 'Edit Data'
+    _form: '\Drupal\pets_owners_storage\Form\PetsOwnersStorageEdit'
+  requirements:
+    _permission: 'access content'
