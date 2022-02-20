@@ -1,0 +1,9 @@
+simple_ajax.content:
+  title: Simple Ajax
+  discription: link menu Simple Ajax
+  route_name: simple_ajax.content
+  menu_name: main
+  weight: 4
+  options:
+    attributes:
+      target: _self

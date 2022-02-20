@@ -1,0 +1,7 @@
+simple_ajax.content:
+  path: '/simple_ajax'
+  defaults:
+    _form: '\Drupal\simple_ajax\Form\SimpleAjax'
+    _title: 'Simple Ajax'
+  requirements:
+    _permission: 'access content'
