@@ -36,10 +36,6 @@ class PetsOwnersStorageEdit extends FormBase {
     ->condition('poid', $this->getPOID())
     ->execute()->fetchAssoc();
 
-//    foreach ($result as $values) {
-//      $value['name'] = $values['name'];
-//    }
-
     //build form 'Pets Owners Storage Edit'
     //name (text)
     $form['name'] = [
