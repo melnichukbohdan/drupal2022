@@ -10,4 +10,24 @@ https://codimth.com/blog/web/drupal/how-use-database-api-creating-custom-form-cr
            https://qna.habr.com/q/187405
 
 
+Ajax API task:2
+
+1. array_map()
+https://www.php.net/manual/ru/function.array-map.php
+
+2. use table bild rows 52-72
+module example -> dbtng_example -> DbtngExampleController.php
+
+3. \Drupal::service('renderer')->render($ajax_link) -> Renderer::render
+https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Render%21Renderer.php/class/Renderer/8.2.x
+
+
+useful link:
+https://internetdevels.ua/blog/creating-popups-in-Drupal-8
+https://niklan.net/blog/125#primer-no3-eschyo-raz-render-array
+https://www.drupal.org/docs/drupal-apis/ajax-api/ajax-dialog-boxes
+
+
+
+
 

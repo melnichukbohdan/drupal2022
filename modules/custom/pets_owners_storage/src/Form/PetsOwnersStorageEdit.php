@@ -36,6 +36,10 @@ class PetsOwnersStorageEdit extends FormBase {
     ->condition('poid', $this->getPOID())
     ->execute()->fetchAssoc();
 
+//    foreach ($result as $values) {
+//      $value['name'] = $values['name'];
+//    }
+
     //build form 'Pets Owners Storage Edit'
     //name (text)
     $form['name'] = [
@@ -199,7 +203,7 @@ class PetsOwnersStorageEdit extends FormBase {
   //get user id with route
   public function getPOID () {
     $route = $_SERVER['REQUEST_URI'];
-    preg_match('#^/pets_owners_storage/(\d)/edit$#', $route, $matches);
+    preg_match('#^/pets_owners_storage/(\d+)/edit$#', $route, $matches);
     $poid = $matches[1];
     return $poid;
   }
