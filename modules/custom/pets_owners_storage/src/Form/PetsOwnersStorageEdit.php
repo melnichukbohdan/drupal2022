@@ -82,6 +82,7 @@ class PetsOwnersStorageEdit extends FormBase {
     $form['parents'] = [
       '#type' => 'details',
       '#title' => 'Parents',
+      '#open' => 'TRUE'
     ];
 
     $form['parents']['father'] = [
