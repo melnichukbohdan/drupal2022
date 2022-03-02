@@ -14,8 +14,8 @@ use Drupal\Core\TypedData\DataDefinition;
  *   label = @Translation("YouTube IFrame"),
  *   category = @Translation("Custom"),
  *   description = @Translation("This field stores code snippets in the database."),
- *   default_widget = "YouTubeIFrameDefaultWidget",
- *   default_formatter = "YouTubeIFrameDefaultFormatter"
+ *   default_widget = "YouTubeWidget",
+ *   default_formatter = "YouTubeFormatter"
  * )
  */
 
