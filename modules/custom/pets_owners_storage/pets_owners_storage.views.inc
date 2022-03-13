@@ -66,11 +66,10 @@ function pets_owners_storage_views_data () {
       'id' => 'standard',
     ],
     'filter' => [
-      'title' => t('User gender'),
-      'help' => t('Specify a list of gender'),
+      'title' => t('Sex'),
+      'help' => t('Custom  filter of gender'),
       'field' => 'prefix',
-      'id' => 'standard',
-      //TODO create custom_views_filter
+      'id' => 'custom_views_sex',
     ],
   ];
   $data['pets_owners_storage']['age'] = [

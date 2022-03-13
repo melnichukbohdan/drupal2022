@@ -28,6 +28,13 @@ https://niklan.net/blog/125#primer-no3-eschyo-raz-render-array
 https://www.drupal.org/docs/drupal-apis/ajax-api/ajax-dialog-boxes
 
 
+Views customization
+
+useful link:
+https://zanzarra.com/blog/custom-views-filter-plugin-drupal-8-bounding-box-geofield
+https://gorannikolovski.com/blog/custom-views-filter-plugin-drupal
+https://www.youtube.com/watch?v=ZQELm9okEdc
+
 
 
 
