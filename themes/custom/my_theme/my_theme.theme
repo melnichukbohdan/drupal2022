@@ -45,3 +45,11 @@ use Drupal\Core\Template\Attribute;
 function my_theme_preprocess_maintenance_page(&$variables) {
  $variables['#attached']['library'][] = 'my_theme/maintenance-page'; }
 
+/**
+* THEME_preprocess_HOOK() for  every page
+*/
+
+function my_theme_preprocess_page(&$variables) {
+  $variables['#attached']['library'][] = 'my_theme/global-scripts';
+  $variables['#attached']['library'][] = 'my_theme/global-styling';
+}

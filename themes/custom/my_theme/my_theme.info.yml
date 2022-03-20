@@ -6,3 +6,5 @@ base theme: bartik
 
 libraries:
   - my_theme/maintenance-page
+  - my_theme/global-styling
+  - my_theme/global-scripts

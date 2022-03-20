@@ -5,3 +5,15 @@ maintenance-page:
   dependencies:
     - system/maintenance
     - bartik/global-styling
+
+global-styling:
+  css:
+    /libraries/jcf/css/theme-minimal/jcf.css: {}
+
+global-scripts:
+  js:
+    /libraries/jcf/js/jcf.js: {}
+    /libraries/jcf/js/jcf.select.js: {}
+    /libraries/jcf/js/jcf.radio.js: {}
+    /libraries/jcf/js/jcf.checkbox.js: {}
+
