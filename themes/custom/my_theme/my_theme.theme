@@ -14,19 +14,22 @@ use Drupal\Core\Template\Attribute;
   function my_theme_theme_suggestions_node_alter(array &$suggestions, array $variables) {
 
     if ($node = \Drupal::routeMatch()->getParameter('node')) {
+      // get entity type
       $node = $variables['elements']['#node'];
+        //check content type
       if ($node->bundle() == 'article') {
 
+        get 'field_template' value
         $field_template = $node->get('field_template')->get(0)->getValue();
-
         //value of field_template from node in string format
         $field_template = $field_template['value'];
-        //if (!empty($field_template)) {
 
+          //set suggestion node__page__faq.html.twig
         if ($field_template == 'faq') {
           $suggestions[] = 'node__page__' . $field_template;
         }
 
+          //set suggestion node__page__sitemap.html.twig
         if ($field_template == 'sitemap') {
           $suggestions[] = 'node__page__' . $field_template;
         }
