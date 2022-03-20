@@ -1,0 +1,7 @@
+maintenance-page:
+  css:
+    theme:
+      css/maintenance-page.css: {}
+  dependencies:
+    - system/maintenance
+    - bartik/global-styling

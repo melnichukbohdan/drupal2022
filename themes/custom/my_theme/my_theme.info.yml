@@ -5,4 +5,4 @@ core_version_requirement: 9.x
 base theme: bartik
 
 libraries:
-  - my_theme/global-styling
+  - my_theme/maintenance-page

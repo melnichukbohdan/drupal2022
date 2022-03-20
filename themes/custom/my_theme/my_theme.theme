@@ -19,7 +19,7 @@ use Drupal\Core\Template\Attribute;
         //check content type
       if ($node->bundle() == 'article') {
 
-        get 'field_template' value
+       // get 'field_template' value
         $field_template = $node->get('field_template')->get(0)->getValue();
         //value of field_template from node in string format
         $field_template = $field_template['value'];
@@ -37,4 +37,11 @@ use Drupal\Core\Template\Attribute;
     }
 
   }
+
+/**
+* THEME_preprocess_HOOK() for  maintenance_page
+*/
+
+function my_theme_preprocess_maintenance_page(&$variables) {
+ $variables['#attached']['library'][] = 'my_theme/maintenance-page'; }
 
