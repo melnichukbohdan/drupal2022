@@ -1,0 +1,37 @@
+<?php
+
+/**
+* @File
+* file for hooks and functions
+*/
+
+use Drupal\Core\Template\Attribute;
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter() for faq or sitemap
+ */
+
+  function my_theme_theme_suggestions_node_alter(array &$suggestions, array $variables) {
+
+    if ($node = \Drupal::routeMatch()->getParameter('node')) {
+      $node = $variables['elements']['#node'];
+      if ($node->bundle() == 'article') {
+
+        $field_template = $node->get('field_template')->get(0)->getValue();
+
+        //value of field_template from node in string format
+        $field_template = $field_template['value'];
+        //if (!empty($field_template)) {
+
+        if ($field_template == 'faq') {
+          $suggestions[] = 'node__page__' . $field_template;
+        }
+
+        if ($field_template == 'sitemap') {
+          $suggestions[] = 'node__page__' . $field_template;
+        }
+      }
+    }
+
+  }
+
