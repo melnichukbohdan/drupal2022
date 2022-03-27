@@ -1,0 +1,5 @@
+service_block:
+  version: VERSION
+  css:
+    theme:
+      css/service_block.css: {}

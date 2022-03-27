@@ -1,0 +1,22 @@
+<?php
+
+/**
+ * Implements hook_theme().
+ */
+function service_block_theme($existing, $type, $theme, $path) {
+  return [
+    'block__service-block' => [
+      'variables' => [
+        'data' => [],
+      ],
+    ],
+  ];
+}
+
+function services_block_entity_view_mode_alter(&$view_mode, Drupal\Core\Entity\EntityInterface $entity, $context) {
+  // Change the view mode to teaser nodes in service block.
+  if ($entity->getEntityTypeId() == 'node' && $view_mode == 'default') {
+    $view_mode = 'teaser';
+  }
+}
+

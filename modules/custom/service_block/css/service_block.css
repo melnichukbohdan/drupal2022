@@ -1,0 +1,22 @@
+
+table {
+border: 3px solid blue !important;
+}
+
+td {
+  padding: 8px 17px !important;
+  border: 3px solid blue !important;
+  width: 300px !important;
+}
+
+td .field--name-title {
+  color: green !important;
+  text-align: center !important;
+  vertical-align: middle !important;
+}
+
+td .image-style-large {
+  border-radius: 10px !important;
+  box-shadow: 4px 4px 14px rgba(0, 0, 0, 025) !important;
+}
+
