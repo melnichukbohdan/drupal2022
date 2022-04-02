@@ -1,0 +1,5 @@
+smile_test.add_form:
+  title: 'Add client'
+  route_name: entity.smile_test.add_form
+  appears_on:
+    - entity.smile_test.collection

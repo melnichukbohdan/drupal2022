@@ -1,11 +1,11 @@
-authenticated_user:
-  title: Authenticated user
-  description: 'Access for authenticated user'
-
-drupal_superuser:
-  title: Drupal Superuser
-  description: 'Access for Drupal Superuser'
-
-anonymous_user:
-  title: Anonymous user
-  description: 'Access anonymous user'
+administer smile test:
+  title: 'Administer smile test settings'
+  restrict access: true
+delete smile test:
+  title: Delete smile test
+create smile test:
+  title: Create smile test
+view smile test:
+  title: View smile test
+edit smile test:
+  title: Edit smile test

@@ -1,9 +1,10 @@
-smile_test.content:
-  title: Smile Test
-  discription: link menu Smile Test
-  route_name: smile_test.content
-  menu_name: Tools
-  weight: -2
-  options:
-    attributes:
-      target: _blank
+entity.smile_test.settings:
+  title: 'Smile test'
+  description: 'Configure a Smile test entity type.'
+  route_name:  entity.smile_test.settings
+  parent: system.admin_structure
+entity.smile_test.collection:
+  title: 'Smile test'
+  description: 'List of smile tests.'
+  route_name: entity.smile_test.collection
+  parent: system.admin_content

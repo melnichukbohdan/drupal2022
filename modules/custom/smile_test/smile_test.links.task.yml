@@ -1,0 +1,22 @@
+entity.smile_test.settings:
+  title: 'Settings'
+  route_name: entity.smile_test.settings
+  base_route: entity.smile_test.settings
+entity.smile_test.view:
+  title: 'View'
+  route_name: entity.smile_test.canonical
+  base_route: entity.smile_test.canonical
+entity.smile_test.edit_form:
+  title: 'Edit'
+  route_name: entity.smile_test.edit_form
+  base_route: entity.smile_test.canonical
+entity.smile_test.delete_form:
+  title: 'Delete'
+  route_name: entity.smile_test.delete_form
+  base_route: entity.smile_test.canonical
+  weight: 10
+entity.smile_test.collection:
+  title: 'Smile tests'
+  route_name: entity.smile_test.collection
+  base_route: system.admin_content
+  weight: 10

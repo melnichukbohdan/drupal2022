@@ -1,15 +1,15 @@
-smile_test.content:
-  path: '/smile-test'
+entity.smile_test.settings:
+  path: 'admin/structure/smile-test'
   defaults:
-    _controller: '\Drupal\smile_test\Controller\SmileTest::content'
-    _title: 'It is my first route ever'
+    _form: '\Drupal\smile_test\Form\SmileTestSettingsForm'
+    _title: 'Smile test'
   requirements:
-    _permission: 'authenticated_user'
+    _permission: 'administer smile test'
 
-smile_test.node_render:
-  path: '/smile-test/node-render/{nid}'
+entity.smile_test.collection:
+  path: '/smile-test/list'
   defaults:
-    _controller: '\Drupal\smile_test\Controller\SmileTest::nodeRender'
+    _entity_list: 'smile_test'
+    _title: 'Client list'
   requirements:
-    _custom_access: '\Drupal\smile_test\Controller\SmileTest::accessDrupalSuperUser'
-    nid: \d+
+    _permission: 'view client entity'
