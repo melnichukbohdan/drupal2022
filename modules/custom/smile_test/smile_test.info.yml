@@ -2,5 +2,10 @@ name: Smile Test
 description: Entity API
 package: custom
 type: module
+version: '1.0'
+
+dependencies:
+  - drupal:options
+  - drupal:user
 
 core_version_requirement: 9.x

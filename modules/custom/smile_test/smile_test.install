@@ -1,0 +1,140 @@
+<?php
+
+use Drupal\Core\Database\Database;
+use Drupal\smile_test\Entity\SmileTest;
+use Drupal\entity\Entity\entity;
+
+/**
+ * Implements update hook_N #1
+ */
+function smile_test_update_9003(){
+  $connection = \Drupal::service('database');
+  $data = [
+    [
+      'uuid' => uniqid(),
+      'uid' => '1',
+      'client_name' => 'Bob',
+      'prefered_brand' => 'Daiwa',
+      'products_owned_count' => 10,
+      'registration_date' => time(),
+      'langcode' => 'en',
+      'created' => time(),
+      'changed' => time()
+    ],
+    [
+      'uuid' => uniqid(),
+      'uid' => '1',
+      'client_name' => 'Jon',
+      'prefered_brand' => 'Shimano',
+      'products_owned_count' => 4,
+      'registration_date' => time(),
+      'langcode' => 'en',
+      'created' => time(),
+      'changed' => time()
+    ],
+    [
+      'uuid' => uniqid(),
+      'uid' => '1',
+      'client_name' => 'Liza',
+      'prefered_brand' => 'Daiwa',
+      'products_owned_count' => 3,
+      'registration_date' => time(),
+      'langcode' => 'en',
+      'created' => time(),
+      'changed' => time()
+    ],
+    [
+      'uuid' => uniqid(),
+      'uid' => '1',
+      'client_name' => 'Mike',
+      'prefered_brand' => 'Shimano',
+      'products_owned_count' => 2,
+      'registration_date' => time(),
+      'langcode' => 'en',
+      'created' => time(),
+      'changed' => time()
+    ],
+  ];
+  foreach ($data as $row) {
+    $result = $connection->insert('smile_test')
+      ->fields([
+        'uuid',
+        'uid',
+        'client_name',
+        'prefered_brand',
+        'products_owned_count',
+        'registration_date',
+        'langcode',
+        'created',
+        'changed'])
+      ->values([
+        'uuid' => $row['uuid'],
+        'uid' => $row['uid'],
+        'client_name' => $row['client_name'],
+        'prefered_brand' => $row['prefered_brand'],
+        'products_owned_count' => $row['products_owned_count'],
+        'registration_date' => $row['registration_date'],
+        'langcode' => $row['langcode'],
+        'created' => $row['created'],
+        'changed' => $row['changed'],
+      ])
+      ->execute();
+  }
+}
+
+ /**
+ * implement update hook #2.
+ */
+function smile_test_update_9006(){
+  $connection = \Drupal::service('database');
+  $oldData = time()-(60*60*24*10);
+  $result = $connection->update('smile_test')
+    ->fields([
+      'registration_date' => time(),
+    ])
+    ->condition('registration_date',$oldData,'<')
+    ->execute();
+}
+
+ /**
+ * implement update hook #3.
+ */
+function smile_test_update_9019(&$sandbox) {
+ //Initialization create dates today -10 days
+  $oldData = time()-(60*60*24*10);
+
+  // Initialize some variables during the first pass through.
+  if (!isset($sandbox['total'])) {
+    $entitys = \Drupal::entityQuery('smile_test')
+      ->condition('registration_date', $oldData, '<')
+      ->execute();
+    $sandbox['total'] = count($entitys);
+    $sandbox['current'] = 0;
+  }
+
+  $entitys_per_batch = 25;
+
+  // Handle one pass through.
+  $entitys = \Drupal::entityQuery('smile_test')
+    ->condition('registration_date', $oldData, '<')
+    ->range($sandbox['current'], $sandbox['current'] + $entitys_per_batch)
+    ->execute();
+
+
+
+  foreach($entitys as $id) {
+    $entity = SmileTest::load($id);
+    $entity->registration_date->value = time();
+    $entity->save();
+    $sandbox['current']++;
+  }
+
+
+  if ($sandbox['total'] == 0) {
+    $sandbox['#finished'] = 1;
+  } else {
+    $sandbox['#finished'] = ($sandbox['current'] / $sandbox['total']);
+  }
+}
+
+
