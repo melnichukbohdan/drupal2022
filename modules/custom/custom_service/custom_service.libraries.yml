@@ -1,0 +1,7 @@
+# Custom module library for general purposes.
+custom_service:
+  version: VERSION
+  css:
+    theme:
+      css/custom_service.css: {}
+

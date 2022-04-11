@@ -1,0 +1,16 @@
+
+<?php
+
+/**
+ * Implements hook_theme().
+ */
+function custom_service_theme($existing, $type, $theme, $path) {
+  return [
+    'service_template' => [
+      'variables' => [
+        'data' => [],
+      ],
+    ],
+  ];
+}
+
