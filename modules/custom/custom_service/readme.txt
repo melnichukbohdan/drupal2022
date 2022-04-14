@@ -17,4 +17,6 @@ useful links
 https://github.com/sharmasachin013/Drupal8_code/blob/master/dependency_injection_services/src/services/Db_insert.php
 https://gist.github.com/ozin7/c34ba6cfed2e26470ac6e29d416545e6
 
+Decorator
+https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Session%21AccountProxy.php/class/AccountProxy/9.0.x
 

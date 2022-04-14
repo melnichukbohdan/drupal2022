@@ -19,7 +19,7 @@ class CustomServiceBlock extends BlockBase {
    * {@inheritdoc}
    */
   public function build() {
-    $data['name'] = \Drupal::service('custom_service.custom_services')->getData();
+    $data['name'] = \Drupal::service('custom_service.custom_services')->getName();
     $data['count'] = \Drupal::service('custom_service.custom_services')->getActiveUsers();
     $data['id'] = \Drupal::service('custom_service.custom_services')->getPositionOfRegistration();
     $data['node'] = \Drupal::service('custom_service.custom_services')->getNode();

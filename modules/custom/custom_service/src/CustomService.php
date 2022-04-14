@@ -15,13 +15,21 @@ class CustomService {
 
   use StringTranslationTrait;
 
+  /**
+   * @var Connection
+   */
   protected $connection;
 
+  /**
+   * @var AccountInterface
+   */
   protected $currentUser;
 
   /**
-   * CustomServiceCustomService constructor.
+   * @param Connection $connection
    * @param AccountInterface $currentUser
+   * @param TranslationInterface $string_translation
+   * @param EntityTypeManagerInterface $entityTypeManager
    */
   public function __construct(Connection $connection,
                               AccountInterface $currentUser,
@@ -35,15 +43,20 @@ class CustomService {
   }
 
   /**
-   * @return \Drupal\Component\Render\MarkupInterface|string
+   * get user name
+   * @return TranslatableMarkup
    */
-  public function getData() {
+  public function getName() {
     $userName = $this->currentUser->getDisplayName();
-    return $this->t('User name - @name',[
+    return $this->t('@name',[
       '@name' => $userName,
     ]);
   }
 
+  /**
+   * get count all users
+   * @return TranslatableMarkup
+   */
   public function getActiveUsers(): TranslatableMarkup {
 
     $result = $this->connection->select('users_field_data')
@@ -56,6 +69,10 @@ class CustomService {
     ]);
   }
 
+  /**
+   * get position of registration
+   * @return TranslatableMarkup
+   */
   public function getPositionOfRegistration () {
     $userId = $this->currentUser->id();
     return $this->t('You have been registered @position_of_registration',[
@@ -63,13 +80,17 @@ class CustomService {
     ]);
   }
 
+  /**
+   * get random node
+   * @return array
+   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+   */
   public function getNode () {
-
     $nodes = $this->entityTypeManager->getStorage('node')->loadMultiple();
     $id_node = array_rand($nodes,1);
     $node = $this->entityTypeManager->getStorage('node')->load($id_node);
     return $this->entityTypeManager->getViewBuilder('node')->view($node,'teaser');
   }
-
 
 }
