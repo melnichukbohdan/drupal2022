@@ -24,15 +24,20 @@ class CustomServiceBlock extends BlockBase {
     $data['id'] = \Drupal::service('custom_service.custom_services')->getPositionOfRegistration();
     $data['node'] = \Drupal::service('custom_service.custom_services')->getNode();
 
-  return [
-    '#theme' => 'service_template',
-    '#data' => $data,
-    '#attached'=>[
-      'library'=>[
-        'custom_service/custom_service'
+    return [
+      '#theme' => 'service_template',
+      '#data' => $data,
+      '#attached'=>[
+        'library'=>[
+          'custom_service/custom_service'
+        ],
       ],
-    ],
-  ];
+      '#cache' => [
+        'contexts' => ['user.roles'],
+        'tags' => ['node_list'],
+
+      ],
+    ];
   }
 
 }
