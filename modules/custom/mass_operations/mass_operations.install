@@ -1,0 +1,40 @@
+<?php
+
+use Drupal\node\Entity\Node;
+
+/**
+ * implement update hook n.
+ * change article title on integer from 1 to 100
+ */
+function mass_operations_update_9005(&$sandbox) {
+
+  // Initialize some variables during the first pass through.
+  if (!isset($sandbox['total'])) {
+    $sandbox['total'] = \Drupal::entityQuery('node')
+      ->condition('type', 'article')
+      ->count()
+      ->execute();
+    $sandbox['current'] = 0;
+  }
+
+  $limit = 25;
+
+  // Handle one pass through.
+  $nids = \Drupal::entityQuery('node')
+    ->condition('type', 'article')
+    ->range($sandbox['current'], $sandbox['current'] + $limit)
+    ->execute();
+
+  foreach($nids as $nid) {
+    $node = Node::load($nid);
+    $node->title->value = random_int(1, 100);
+    $node->save();
+    $sandbox['current']++;
+  }
+
+  if ($sandbox['total'] == 0) {
+    $sandbox['#finished'] = 1;
+  } else {
+    $sandbox['#finished'] = ($sandbox['current'] / $sandbox['total']);
+  }
+}
