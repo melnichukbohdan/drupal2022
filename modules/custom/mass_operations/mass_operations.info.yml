@@ -1,0 +1,5 @@
+name: Mass Operations
+type: module
+description: Provide Example Queue API + Batch API
+package: Custom
+core_version_requirement: ^9

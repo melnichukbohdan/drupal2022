@@ -1,0 +1,7 @@
+demo.form:
+  path: '/mass-operations'
+  defaults:
+    _form: '\Drupal\mass_operations\Form\NodeUnPublisherQueueForm'
+    _title: 'Node Unpublisher'
+  requirements:
+    _permission: 'administer site configuration'
