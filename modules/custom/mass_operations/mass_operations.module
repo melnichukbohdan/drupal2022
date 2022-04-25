@@ -5,7 +5,6 @@
  * Primary module hooks for mass_operations module.
  */
 
-
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Queue\QueueFactory;
 use Drupal\Core\Queue\QueueInterface;
@@ -14,7 +13,6 @@ use Drupal\Core\Queue\QueueInterface;
  * Implements hook_cron()
  * for add all nodes in queue 'node_unpublisher'
  */
-
 
 function mass_operations_cron(){
   $queue = \Drupal::queue('node_unpublisher');

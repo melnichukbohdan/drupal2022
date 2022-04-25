@@ -28,7 +28,7 @@ use Drupal\node\NodeInterface;
    protected $nodeStorage;
 
     /**
-    * Creates a new Node Unpublish.
+    * Creates a new NodeUnpublish.
     *
     * @param \Drupal\Core\Entity\EntityTypeManagerInterface $nodeStorage
     *   The node storage.
@@ -56,7 +56,6 @@ use Drupal\node\NodeInterface;
         $nodes->load($data)
          ->setUnpublished()
          ->save();
-
      }
    }
  }
