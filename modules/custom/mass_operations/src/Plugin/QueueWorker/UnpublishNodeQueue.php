@@ -2,14 +2,12 @@
 
 namespace Drupal\mass_operations\Plugin\QueueWorker;
 
-use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Queue\QueueWorkerBase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\Entity\EntityPublishedInterface;
-
-
-
+use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\node\NodeInterface;
 
 /**
  *
@@ -22,21 +20,20 @@ use Drupal\Core\Entity\EntityPublishedInterface;
 
  class UnpublishNodeQueue extends QueueWorkerBase implements ContainerFactoryPluginInterface {
 
-
    /**
     * The node storage.
     *
-    * @var \Drupal\Core\Entity\EntityStorageInterface
+    * @var \Drupal\Core\Entity\EntityTypeManagerInterface
     */
    protected $nodeStorage;
 
     /**
-    * Creates a new NodeUnpublish.
+    * Creates a new Node Unpublish.
     *
-    * @param \Drupal\Core\Entity\EntityStorageInterface $nodeStorage
+    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $nodeStorage
     *   The node storage.
     */
-   public function __construct(EntityStorageInterface $nodeStorage) {
+   public function __construct(EntityTypeManagerInterface $nodeStorage) {
        $this->nodeStorage = $nodeStorage;
    }
 
@@ -45,16 +42,18 @@ use Drupal\Core\Entity\EntityPublishedInterface;
     */
    public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
      return new static(
-       $container->get('entity_type.manager')->getStorage('node')
+       $container->get('entity_type.manager')
      );
    }
 
-
+   /**
+    * {@inheritdoc}
+    */
    public function processItem($data) {
-     /** @var EntityPublishedInterface $node_storage */
-     $node_storage = \Drupal::entityTypeManager()->getStorage('node');
-     if (!empty($data) && $node_storage->load($data) && $node_storage->load($data)->isPublished()) {
-       $node_storage->load($data)
+     /** @var EntityPublishedInterface $nodes */
+     $nodes = $this->nodeStorage->getStorage('node')->load($data);
+     if ($nodes instanceof NodeInterface && $nodes->isPublished()) {
+        $nodes->load($data)
          ->setUnpublished()
          ->save();
 
