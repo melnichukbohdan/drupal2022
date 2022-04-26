@@ -5,30 +5,32 @@
  * Primary module hooks for mass_operations module.
  */
 
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/main
-use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Queue\QueueFactory;
 use Drupal\Core\Queue\QueueInterface;
 
-/**
- * Implements hook_cron()
- * for add all nodes in queue 'node_unpublisher'
- */
+  /**
+   * Implements hook_cron()
+   * for add nodes in queue 'node_unpublisher'
+   */
+  function mass_operations_cron() {
 
-<<<<<<< HEAD
+    $conf = \Drupal::config("custom_cron.set_parameters");
+    $limit = $conf->get('item');
 
-=======
->>>>>>> origin/main
-function mass_operations_cron(){
-  $queue = \Drupal::queue('node_unpublisher');
-  $nids = \Drupal::entityQuery('node')
-  ->condition('status', '1')
-  ->execute();
-  foreach ($nids as $nid) {
-  $queue->createItem($nid);
-  }
+    /** @var QueueFactory $queue_factory */
+    $queue_factory = \Drupal::service('queue');
+    /** @var QueueInterface $queue */
+    $queue = $queue_factory->get('node_unpublisher');
+
+    $data = \Drupal::entityQuery('node')
+      ->condition('status', '1')
+      ->sort('created')
+      ->range(0 , $limit)
+      ->execute();
+
+    foreach ($data as $node) {
+      $queue->createItem($node);
+    }
+
 }
 

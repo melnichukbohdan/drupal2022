@@ -28,11 +28,7 @@ use Drupal\node\NodeInterface;
    protected $nodeStorage;
 
     /**
-<<<<<<< HEAD
-    * Creates a new Node Unpublish.
-=======
     * Creates a new NodeUnpublish.
->>>>>>> origin/main
     *
     * @param \Drupal\Core\Entity\EntityTypeManagerInterface $nodeStorage
     *   The node storage.
@@ -57,13 +53,8 @@ use Drupal\node\NodeInterface;
      /** @var EntityPublishedInterface $nodes */
      $nodes = $this->nodeStorage->getStorage('node')->load($data);
      if ($nodes instanceof NodeInterface && $nodes->isPublished()) {
-        $nodes->load($data)
-         ->setUnpublished()
+        $nodes->setUnpublished()
          ->save();
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/main
      }
    }
  }

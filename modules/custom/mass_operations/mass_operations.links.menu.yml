@@ -1,0 +1,9 @@
+mass_operations.form:
+  title: Custom cron
+  route_name: mass_operations.form
+  parent: system.admin_config_system
+  description: 'Add to queue for unpablish nodes'
+  weight: 3
+  options:
+    attributes:
+      target: _self

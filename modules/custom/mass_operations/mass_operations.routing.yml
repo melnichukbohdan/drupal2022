@@ -1,7 +1,7 @@
-demo.form:
-  path: '/mass-operations'
+mass_operations.form:
+  path: '/admin/config/system/custom-cron'
   defaults:
-    _form: '\Drupal\mass_operations\Form\NodeUnPublisherQueueForm'
-    _title: 'Node Unpublisher'
+    _form: '\Drupal\mass_operations\Form\CustomCron'
+    _title: 'Custom Cron'
   requirements:
     _permission: 'administer site configuration'
