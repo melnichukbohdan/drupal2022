@@ -7,6 +7,9 @@
 
 use Drupal\Core\Queue\QueueFactory;
 use Drupal\Core\Queue\QueueInterface;
+use Drupal\node\NodeInterface;
+use Drupal\user\Entity\User;
+use Drupal\Core\Entity\EntityInterface;
 
   /**
    * Implements hook_cron()
@@ -25,12 +28,27 @@ use Drupal\Core\Queue\QueueInterface;
     $data = \Drupal::entityQuery('node')
       ->condition('status', '1')
       ->sort('created')
-      ->range(0 , $limit)
+      ->range(0, $limit)
       ->execute();
 
     foreach ($data as $node) {
       $queue->createItem($node);
     }
+  }
 
-}
+    /**
+     * Implements hook_node_insert().
+     */
+    function mass_operations_node_insert(Drupal\Core\Entity\EntityInterface $node) {
+
+      $data['node_title'] = $node->getTitle();
+      $data['node_id'] = $node->id();
+
+      /** @var QueueFactory $queue_factory */
+      $queue_factory = \Drupal::service('queue');
+      /** @var QueueInterface $queue */
+      $queue = $queue_factory->get('noticeDBLog');
+      $queue->createItem($data);
+    }
+
 
