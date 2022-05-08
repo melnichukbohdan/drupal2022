@@ -7,3 +7,13 @@ mass_operations.form:
   options:
     attributes:
       target: _self
+
+mass_operations.batch:
+  title: DB logs batch
+  route_name: mass_operations.batch
+  description: 'Custom Batch API example.'
+  parent: system.admin_config_system
+  weight: 4
+  options:
+    attributes:
+      target: _self

@@ -5,3 +5,11 @@ mass_operations.form:
     _title: 'Custom Cron'
   requirements:
     _permission: 'administer site configuration'
+
+mass_operations.batch:
+  path: '/admin/config/system/batch'
+  defaults:
+    _form: '\Drupal\mass_operations\Form\BatchForm'
+    _title: 'Mass operations batch'
+  requirements:
+    _permission: 'administer site configuration'
