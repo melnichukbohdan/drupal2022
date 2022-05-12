@@ -201,6 +201,10 @@ class PetsOwnersStorageEdit extends FormBase {
         watchdog_exception('type', $e);
       }
 
+      //invalidate cache
+      \Drupal::service('cache_tags.invalidator')
+        ->invalidateTags(['node_list']);
+
     // show message and redirect to list page
     \Drupal::messenger()->addStatus('Succesfully edit');
     $form_state->setRedirect('pets_owners_storage.table');
@@ -208,7 +212,8 @@ class PetsOwnersStorageEdit extends FormBase {
 
   // redirect on route - pets_owners_storage.delete
   public function delete(array &$form, FormStateInterface $form_state) {
-   $id['id'] = $form_state->getValue('poid');
+    $id['id'] = $form_state->getValue('poid');
+
     $form_state->setRedirect('pets_owners_storage.delete', $id);
   }
 }

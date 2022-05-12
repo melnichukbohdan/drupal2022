@@ -162,6 +162,10 @@ class PetsOwnersStorageForm extends FormBase {
       watchdog_exception('type', $e);
     }
 
+    //invalidate cache
+    \Drupal::service('cache_tags.invalidator')
+      ->invalidateTags(['node_list']);
+
     $this->messenger()->addMessage($this->t('Thank you.'));
     $form_state->setRedirect('pets_owners_storage.table');
   }

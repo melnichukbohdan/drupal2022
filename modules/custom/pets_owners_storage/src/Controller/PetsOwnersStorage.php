@@ -86,6 +86,10 @@ class PetsOwnersStorage extends ControllerBase {
         '#type' => 'table',
         '#header' => $header_table,
         '#rows' => $rows,
+        '#empty' => $this->t('No entries available.'),
+        '#cache' => [
+          'tags' => ['node_list'],
+        ],
       ];
       return $form;
   }

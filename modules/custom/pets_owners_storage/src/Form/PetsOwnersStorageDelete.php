@@ -75,6 +75,9 @@ class PetsOwnersStorageDelete extends ConfirmFormBase {
    $connection->delete('pets_owners_storage')
      ->condition('poid', $this->id)
      ->execute();
+    //invalidate cache
+    \Drupal::service('cache_tags.invalidator')
+      ->invalidateTags(['node_list']);
    \Drupal::messenger()->addStatus('Succesfully deleted');
    $form_state->setRedirect('pets_owners_storage.table');
   }
