@@ -4,6 +4,7 @@ namespace Drupal\pets_owners_storage\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\pets_owners_storage\Controller\PetsOwnersStorage;
 
 class PetsOwnersStorageEdit extends FormBase {
 
@@ -18,9 +19,10 @@ class PetsOwnersStorageEdit extends FormBase {
    * {@Inheritdoc}
    */
 
-  public function buildForm(array $form, FormStateInterface $form_state) {
+  public function buildForm(array $form, FormStateInterface $form_state, $id = NULL) {
 
     // get data from database
+    $this->id = $id;
     $connection = \Drupal::database()
       ->select('pets_owners_storage', 'p');
     $values = $connection->fields('p', [
@@ -33,10 +35,16 @@ class PetsOwnersStorageEdit extends FormBase {
       'mother',
       'pet_name',
       'email'])
-    ->condition('poid', $this->getPOID())
+    ->condition('poid', $this->id )
     ->execute()->fetchAssoc();
 
     //build form 'Pets Owners Storage Edit'
+
+    $form['poid'] = [
+      '#type' => 'hidden',
+      '#default_value' => $values['poid'],
+
+    ];
     //name (text)
     $form['name'] = [
       '#type' => 'textfield',
@@ -169,6 +177,7 @@ class PetsOwnersStorageEdit extends FormBase {
 
     // get data with edit form
     $data = [
+      'poid' =>$form_state->getValue('poid'),
       'name' => $form_state->getValue('name'),
       'gender' => $form_state->getValue('gender'),
       'prefix' => $form_state->getValue('prefix'),
@@ -178,14 +187,14 @@ class PetsOwnersStorageEdit extends FormBase {
       'pet_name' => $form_state->getValue('pet_name'),
       'email' => $form_state->getValue('email'),
     ];
-
       $connection = \Drupal::database();
       $transaction = $connection
         ->startTransaction();
       try {
         $connection->update('pets_owners_storage')
-        ->fields($data)
-        ->condition('poid', $this->getPOID())->execute();
+          ->fields($data)
+          ->condition('poid', $this->id)
+          ->execute();
       } catch (Exception $e) {
         $transaction
           ->rollBack();
@@ -197,17 +206,9 @@ class PetsOwnersStorageEdit extends FormBase {
     $form_state->setRedirect('pets_owners_storage.table');
   }
 
-  //get user id with route
-  public function getPOID () {
-    $route = $_SERVER['REQUEST_URI'];
-    preg_match('#^/pets_owners_storage/(\d+)/edit$#', $route, $matches);
-    $poid = $matches[1];
-    return $poid;
-  }
-
   // redirect on route - pets_owners_storage.delete
   public function delete(array &$form, FormStateInterface $form_state) {
-    $id = ['id' => $this->getPOID()];
+   $id['id'] = $form_state->getValue('poid');
     $form_state->setRedirect('pets_owners_storage.delete', $id);
   }
 }
