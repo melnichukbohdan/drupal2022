@@ -43,7 +43,12 @@ https://niklan.net/blog/165
 https://www.valuebound.com/resources/blog/create-rest-resource-for-get-method-drupal-8
 
 
-drupal2022/api/pets_owners/v1/get-pets-owners/?id=2&_format=json
+REST API - PATCH
+https://drupal-qa.com/patch-method-sample-code-rest-api
+
+
+http://drupal2022/v1/get-pets-owners/?id=2&_format=json
+XDEBUG_SESSION_START=PHPSTORM
 
 ModifiedResourceResponse - не кешується
 ResourceResponse - кешується, для тесту не використовувати
