@@ -35,6 +35,17 @@ https://zanzarra.com/blog/custom-views-filter-plugin-drupal-8-bounding-box-geofi
 https://gorannikolovski.com/blog/custom-views-filter-plugin-drupal
 https://www.youtube.com/watch?v=ZQELm9okEdc
 
+REST API
 
+https://www.drupal.org/docs/drupal-apis/restful-web-services-api/custom-rest-resources
+https://www.youtube.com/watch?v=xbBlbEcJmSo
+https://niklan.net/blog/165
+https://www.valuebound.com/resources/blog/create-rest-resource-for-get-method-drupal-8
+
+
+drupal2022/api/pets_owners/v1/get-pets-owners/?id=2&_format=json
+
+ModifiedResourceResponse - не кешується
+ResourceResponse - кешується, для тесту не використовувати
 
 

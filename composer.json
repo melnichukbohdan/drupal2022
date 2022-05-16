@@ -57,6 +57,7 @@
         "drupal/flexslider": "2.0",
         "drupal/pathauto": "^1.9",
         "drupal/redirect": "^1.7",
+        "drupal/restui": "^1.20",
         "drupal/vbo_export": "3.4",
         "drupal/views_bulk_edit": "2.6",
         "drupal/views_bulk_operations": "^4.1",
