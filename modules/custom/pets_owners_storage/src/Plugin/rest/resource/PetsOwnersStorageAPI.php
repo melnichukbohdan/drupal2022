@@ -153,4 +153,54 @@ class PetsOwnersStorageAPI extends ResourceBase {
     }
   }
 
+  public function patch (Request $request) {
+
+    $content = json_decode($request->getContent());
+    // get pet owner id
+    $poid = $content->id;
+
+    // get pet owner data
+    $data = [];
+    if (isset($content->name)) {
+      $data['name'] = $content->name;
+    }
+    if (isset($content->gender)) {
+      $data['gender'] = $content->gender;
+    }
+    if (isset($content->prefix)) {
+      $data['prefix'] = $content->prefix;
+    }
+    if (isset($content->age)) {
+      $data['age'] = $content->age;
+    }
+    if (isset($content->father)) {
+      $data['father'] = $content->father;
+    }
+    if (isset($content->mother)) {
+      $data['mother'] = $content->mother;
+    }
+    if (isset($content->pet_name)) {
+      $data['pet_name'] = $content->pet_name;
+    }
+    if (isset($content->email)) {
+      $data['email'] = $content->email;
+    }
+
+    try {
+      $queryDB = Database::getConnection()
+        ->update('pets_owners_storage')
+        ->fields($data)
+        ->condition('poid', $poid)
+        ->execute();
+      if ($queryDB == 1) {
+        return new ModifiedResourceResponse('Successful update pet owner data ID ' . $poid, 200);
+      } else {
+        return new ModifiedResourceResponse('Pet owner with ID ' . $poid . ' is not found', 200);
+      }
+    } catch (\Exception $e) {
+      return new ModifiedResourceResponse($e->getMessage());
+
+    }
+  }
+
 }
