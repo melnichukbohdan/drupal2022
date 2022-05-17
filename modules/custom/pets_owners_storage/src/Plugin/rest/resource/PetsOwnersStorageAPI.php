@@ -103,6 +103,12 @@ class PetsOwnersStorageAPI extends ResourceBase {
     }
   }
 
+  /**
+   * Edit specific record (by row Primary Key - ID)
+   * method POST
+   * @param Request $request
+   * @return ModifiedResourceResponse
+   */
   public function post (Request $request) {
 
     $content = json_decode($request->getContent());
@@ -153,6 +159,12 @@ class PetsOwnersStorageAPI extends ResourceBase {
     }
   }
 
+  /**
+   * Edit specific record (by row Primary Key - ID)
+   * method PATCH
+   * @param Request $request
+   * @return ModifiedResourceResponse
+   */
   public function patch (Request $request) {
 
     $content = json_decode($request->getContent());
@@ -196,6 +208,31 @@ class PetsOwnersStorageAPI extends ResourceBase {
         return new ModifiedResourceResponse('Successful update pet owner data ID ' . $poid, 200);
       } else {
         return new ModifiedResourceResponse('Pet owner with ID ' . $poid . ' is not found', 200);
+      }
+    } catch (\Exception $e) {
+      return new ModifiedResourceResponse($e->getMessage());
+
+    }
+  }
+
+  /**
+   * Delete specific record (by row Primary Key - ID)
+   * @param Request $request
+   * @return ModifiedResourceResponse
+   */
+  public function delete (Request $request) {
+
+    $poid = $request->get('id');
+
+    try {
+      $queryDB = Database::getConnection()
+        ->delete('pets_owners_storage')
+        ->condition('poid', $poid)
+        ->execute();
+      if ($queryDB == 1) {
+        return new ModifiedResourceResponse(NULL, 200);
+      } else {
+        return new ModifiedResourceResponse(NULL, 204);
       }
     } catch (\Exception $e) {
       return new ModifiedResourceResponse($e->getMessage());

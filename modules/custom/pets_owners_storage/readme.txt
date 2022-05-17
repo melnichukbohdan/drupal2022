@@ -46,6 +46,10 @@ https://www.valuebound.com/resources/blog/create-rest-resource-for-get-method-dr
 REST API - PATCH
 https://drupal-qa.com/patch-method-sample-code-rest-api
 
+REST API - DELETE
+HTTP status code for delete
+https://stackoverflow.com/questions/2342579/http-status-code-for-update-and-delete
+
 
 http://drupal2022/v1/get-pets-owners/?id=2&_format=json
 XDEBUG_SESSION_START=PHPSTORM
