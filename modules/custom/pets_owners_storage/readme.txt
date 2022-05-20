@@ -57,4 +57,6 @@ XDEBUG_SESSION_START=PHPSTORM
 ModifiedResourceResponse - не кешується
 ResourceResponse - кешується, для тесту не використовувати
 
+https://drupalbook.org/ru/docs/8/api/database-api/dynamic-queries/count-queries
+
 
