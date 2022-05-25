@@ -7,9 +7,8 @@
 
 use Drupal\Core\Queue\QueueFactory;
 use Drupal\Core\Queue\QueueInterface;
-use Drupal\node\NodeInterface;
-use Drupal\user\Entity\User;
-use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
+
 
 
 //  /**
@@ -83,4 +82,13 @@ function mass_operations_cron() {
   }
 }
 
+/**
+ * Implements hook_user_login().
+ */
+function mass_operations_user_login($account) {
+  $message = new TranslatableMarkup('Nice to see you again, <strong>@username</strong>!', [
+    '@username' => $account->getDisplayName(),
+  ]);
+  \Drupal::messenger()->addMessage($message);
+}
 
