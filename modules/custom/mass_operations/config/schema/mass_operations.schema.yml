@@ -1,0 +1,19 @@
+# Configuration schema for configuration cron.
+
+mass_operations.config:
+  type: config_object
+  label: 'Configuration cron'
+  mapping:
+    period:
+      type: integer
+      label: 'How many days ago should be lastly changed node to recognize as requested one'
+    items:
+      type: integer
+      label: 'How many items should be created on each cron run'
+    disabled :
+      type: boolean
+      label: 'Define if on cron run we should find nodes or just postpone any actions until user will enable it again'
+    unpublsihed_label:
+      type: text
+      label: 'Unpublsihed label'
+
