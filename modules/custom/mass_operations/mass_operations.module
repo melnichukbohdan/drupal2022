@@ -11,30 +11,32 @@ use Drupal\node\NodeInterface;
 use Drupal\user\Entity\User;
 use Drupal\Core\Entity\EntityInterface;
 
-  /**
-   * Implements hook_cron()
-   * for add nodes in queue 'node_unpublisher'
-   */
-  function mass_operations_cron() {
 
-    $conf = \Drupal::config("custom_cron.set_parameters");
-    $limit = $conf->get('item');
+//  /**
+//   * Implements hook_cron()
+//   * for add nodes in queue 'node_unpublisher'
+//   */
+//  function mass_operations_cron() {
+//
+//    $conf = \Drupal::config("custom_cron.set_parameters");
+//    $limit = $conf->get('item');
+//
+//    /** @var QueueFactory $queue_factory */
+//    $queue_factory = \Drupal::service('queue');
+//    /** @var QueueInterface $queue */
+//    $queue = $queue_factory->get('node_unpublisher');
+//
+//    $data = \Drupal::entityQuery('node')
+//      ->condition('status', '1')
+//      ->sort('created')
+//      ->range(0, $limit)
+//      ->execute();
+//
+//    foreach ($data as $node) {
+//      $queue->createItem($node);
+//    }
+//  }
 
-    /** @var QueueFactory $queue_factory */
-    $queue_factory = \Drupal::service('queue');
-    /** @var QueueInterface $queue */
-    $queue = $queue_factory->get('node_unpublisher');
-
-    $data = \Drupal::entityQuery('node')
-      ->condition('status', '1')
-      ->sort('created')
-      ->range(0, $limit)
-      ->execute();
-
-    foreach ($data as $node) {
-      $queue->createItem($node);
-    }
-  }
 
     /**
      * Implements hook_node_insert().
@@ -50,5 +52,35 @@ use Drupal\Core\Entity\EntityInterface;
       $queue = $queue_factory->get('noticeDBLog');
       $queue->createItem($data);
     }
+
+/**
+ * Implements hook_cron()
+ * for add nodes in queue 'node_unpublisher'
+ */
+function mass_operations_cron() {
+
+  $conf = \Drupal::config("mass_operations.set_param");
+  if ($conf->get('disabled') == 1) {
+
+    $limit = $conf->get('items');
+    $period = time() - 86400 * $conf->get('period');
+
+    /** @var QueueFactory $queue_factory */
+    $queue_factory = \Drupal::service('queue');
+    /** @var QueueInterface $queue */
+    $queue = $queue_factory->get('node_unpublisher');
+
+    $data = \Drupal::entityQuery('node')
+      ->condition('status', '1')
+      ->condition('changed', $period, '>')
+      ->sort('changed')
+      ->range(0, $limit)
+      ->execute();
+
+    foreach ($data as $node) {
+      $queue->createItem($node);
+    }
+  }
+}
 
 

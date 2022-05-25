@@ -12,3 +12,6 @@ https://www.youtube.com/watch?v=DgRi9hWgObY&ab_channel=Drupal4Gov
  https://drupalize.me/blog/201510/how-log-messages-drupal-8
  https://www.youtube.com/watch?v=gOssM3sQkUM
  https://www.drupal.org/docs/8/api/logging-api/overview
+
+Configuration API
+https://niklan.net/blog/179

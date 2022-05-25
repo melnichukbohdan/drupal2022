@@ -50,9 +50,11 @@ use Drupal\node\NodeInterface;
     * {@inheritdoc}
     */
    public function processItem($data) {
-     /** @var EntityPublishedInterface $nodes */
+     $config = \Drupal::configFactory()->get('mass_operations.set_param');
+
      $nodes = $this->nodeStorage->getStorage('node')->load($data);
      if ($nodes instanceof NodeInterface && $nodes->isPublished()) {
+        $nodes->setTitle($nodes->getTitle() . ' | ' . $config->get('unpublsihed_label'));
         $nodes->setUnpublished()
          ->save();
      }

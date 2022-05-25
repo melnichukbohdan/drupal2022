@@ -17,3 +17,13 @@ mass_operations.batch:
   options:
     attributes:
       target: _self
+
+mass_operations.config:
+  title: Content cliner
+  route_name: mass_operations.config
+  description: 'Configuration API example.'
+  parent: system.admin_config_system
+  weight: 5
+  options:
+    attributes:
+      target: _self

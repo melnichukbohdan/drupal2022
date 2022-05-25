@@ -13,3 +13,11 @@ mass_operations.batch:
     _title: 'Mass operations batch'
   requirements:
     _permission: 'administer site configuration'
+
+mass_operations.config:
+  path: '/admin/config/system/config'
+  defaults:
+    _form: '\Drupal\mass_operations\Form\ConfigCron'
+    _title: 'Mass operations config'
+  requirements:
+    _permission: 'administer site configuration'
