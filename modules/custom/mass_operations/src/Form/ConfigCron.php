@@ -30,6 +30,7 @@ class ConfigCron extends ConfigFormBase {
       '#type' => 'number',
       '#title' => 'Period',
       '#description' => 'min 180 days',
+      '#default_value' => $this->config('mass_operations.set_param')->get('period'),
       '#required' => TRUE
     ];
 
@@ -37,6 +38,7 @@ class ConfigCron extends ConfigFormBase {
       '#type' => 'number',
       '#title' => 'Items',
       '#description' => 'min 5, max 25',
+      '#default_value' => $this->config('mass_operations.set_param')->get('items'),
       '#required' => TRUE
     ];
 
