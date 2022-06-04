@@ -1,0 +1,16 @@
+<?php
+
+use \Drupal\node_save_event\Event\NodeSaveEvent;
+
+  /**
+   * Implements hook_node_insert().
+   */
+  function node_save_event_node_insert(Drupal\Core\Entity\EntityInterface $node) {
+    /** @var \Drupal\Component\EventDispatcher\ContainerAwareEventDispatcher $dispatcher */
+    $dispatcher = \Drupal::service('event_dispatcher');
+    // Create event object passing arguments.
+    $event = new NodeSaveEvent($node);
+    // Call it.
+    $dispatcher->dispatch(NodeSaveEvent::NODE_SAVE, $event);
+  }
+

@@ -1,0 +1,8 @@
+services:
+  node_save_events.subscriber:
+    class: '\Drupal\node_save_event\EventSubscriber\NodeSaveEventsSubscriber'
+    arguments:
+      - '@messenger'
+    tags:
+      - { name: 'event_subscriber'}
+
