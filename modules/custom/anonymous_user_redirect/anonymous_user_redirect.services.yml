@@ -1,0 +1,6 @@
+services:
+  anonymous_user_redirect.event_subscriber:
+    class: Drupal\anonymous_user_redirect\EventSubscriber\AnonymousUserRedirectSubscriber
+    arguments: ['@current_route_match', '@current_user']
+    tags:
+      - { name: event_subscriber }
