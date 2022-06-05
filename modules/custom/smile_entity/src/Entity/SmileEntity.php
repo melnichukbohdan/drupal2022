@@ -42,11 +42,11 @@ use Drupal\smile_entity\SmileEntityInterface;
  *     "uuid" = "uuid",
  *   },
  *   links = {
- *     "collection" = "/admin/content/smile-entity",
- *     "add-form" = "/smile-entity/add",
- *     "canonical" = "/smile-entity/{smile_entity}",
- *     "edit-form" = "/smile-entity/{smile_entity}/edit",
- *     "delete-form" = "/smile-entity/{smile_entity}/delete",
+ *     "collection" = "/smile",
+ *     "add-form" = "/smile/add",
+ *     "canonical" = "/smile/{smile_entity}",
+ *     "edit-form" = "/smile/{smile_entity}/edit",
+ *     "delete-form" = "/smile/{smile_entity}/delete",
  *   },
  *   field_ui_base_route = "entity.smile_entity.settings",
  * )

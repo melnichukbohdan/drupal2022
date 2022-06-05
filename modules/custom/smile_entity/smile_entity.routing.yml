@@ -5,3 +5,19 @@ entity.smile_entity.settings:
     _title: 'Smile entity'
   requirements:
     _permission: 'administer smile entity'
+
+entity.smile_entity.canonical:
+  path: 'smile/{smile_entity}'
+  defaults:
+    _entity_view: 'smile_entity'
+    _title: 'Smile entity'
+  requirements:
+    _entity_access: 'smile_entity.view'
+
+entity.smile_entity.collection:
+  path: '/smile'
+  defaults:
+    _entity_list: 'smile_entity'
+    _title: 'Smile entity list'
+  requirements:
+    _permission: 'view smile entity'
