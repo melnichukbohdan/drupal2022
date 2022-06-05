@@ -1,0 +1,7 @@
+entity.smile_entity.settings:
+  path: 'admin/structure/smile-entity'
+  defaults:
+    _form: '\Drupal\smile_entity\Form\SmileEntitySettingsForm'
+    _title: 'Smile entity'
+  requirements:
+    _permission: 'administer smile entity'

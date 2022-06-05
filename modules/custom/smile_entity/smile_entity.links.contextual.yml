@@ -1,0 +1,10 @@
+entity.smile_entity.edit_form:
+  route_name: entity.smile_entity.edit_form
+  group: smile_entity
+  title: Edit
+
+entity.smile_entity.delete_form:
+  route_name: entity.smile_entity.delete_form
+  group: smile_entity
+  title: Delete
+  weight: 10

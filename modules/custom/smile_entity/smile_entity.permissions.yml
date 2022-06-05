@@ -1,0 +1,11 @@
+administer smile entity:
+  title: 'Administer smile entity settings'
+  restrict access: true
+delete smile entity:
+  title: Delete smile entity
+create smile entity:
+  title: Create smile entity
+view smile entity:
+  title: View smile entity
+edit smile entity:
+  title: Edit smile entity

@@ -1,0 +1,10 @@
+entity.smile_entity.settings:
+  title: 'Smile entity'
+  description: 'Configure a Smile entity entity type.'
+  route_name:  entity.smile_entity.settings
+  parent: system.admin_structure
+entity.smile_entity.collection:
+  title: 'Smile entities'
+  description: 'List of smile entities.'
+  route_name: entity.smile_entity.collection
+  parent: system.admin_content

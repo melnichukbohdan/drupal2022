@@ -1,0 +1,7 @@
+name: Smile Entity
+description: Practice 1
+package: custom
+type: module
+version: '1.0'
+
+core_version_requirement: 9.x
