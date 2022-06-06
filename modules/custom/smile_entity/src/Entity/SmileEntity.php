@@ -7,6 +7,7 @@ use Drupal\Core\Entity\EntityChangedTrait;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\smile_entity\SmileEntityInterface;
+use Drupal\user\Entity\Role;
 
 /**
  * Defines the smile entity entity class.
@@ -92,6 +93,31 @@ class SmileEntity extends ContentEntityBase implements SmileEntityInterface {
         'type' => 'text_area',
         'weight' => -4,
       ])
+      ->setDisplayConfigurable('view', TRUE);
+
+    $roles = Role::loadMultiple();
+    $data = [];
+    foreach ($roles as $role) {
+      $data[$role->id()] = $role->label();
+    }
+
+    $fields['role'] = BaseFieldDefinition::create('list_string')
+      ->setLabel(t('User role'))
+      ->setDescription(t('User role with access for this entity'))
+      ->setRequired(TRUE)
+      ->setSettings([
+        'allowed_values' => $data
+      ])
+      ->setDisplayOptions('view', [
+        'label' => 'above',
+        'type' => 'string',
+        'weight' => -2,
+      ])
+      ->setDisplayOptions('form', [
+        'type' => 'options_select',
+        'weight' => -3,
+      ])
+      ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
 
     $fields['changed'] = BaseFieldDefinition::create('changed')

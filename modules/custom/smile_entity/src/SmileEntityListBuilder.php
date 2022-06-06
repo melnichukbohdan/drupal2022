@@ -72,6 +72,7 @@ class SmileEntityListBuilder extends EntityListBuilder {
     $header['id'] = $this->t('ID');
     $header['title'] = $this->t('Label');
     $header['body'] = $this->t('Body');
+    $header['role'] = $this->t('User Role');
     $header['changed'] = $this->t('Updated');
     return $header + parent::buildHeader();
   }
@@ -84,6 +85,7 @@ class SmileEntityListBuilder extends EntityListBuilder {
     $row['id'] = $entity->id();
     $row['title'] = $entity->toLink($entity->title->value);
     $row['body'] = $entity->body->value;
+    $row['role'] = $entity->role->value;
     $row['changed'] = $this->dateFormatter->format($entity->getChangedTime());
     return $row + parent::buildRow($entity);
   }

@@ -1,0 +1,17 @@
+<?php
+
+use Drupal\Core\Field\BaseFieldDefinition;
+
+
+function smile_entity_update_9007() {
+    $fields['role'] = BaseFieldDefinition::create('list_string')
+      ->setLabel(t('User role'))
+      ->setDescription(t('User role with access for this entity'))
+      ->setRequired(TRUE)
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+
+    \Drupal::entityDefinitionUpdateManager()
+      ->installFieldStorageDefinition('role', 'smile_entity', 'smile_entity', $fields['role']);
+ }
+
