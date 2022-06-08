@@ -16,30 +16,23 @@ class SmileEntityAccessControlHandler extends EntityAccessControlHandler {
    * {@inheritdoc}
    */
   protected function checkAccess(EntityInterface $entity, $operation, AccountInterface $account) {
+    if (in_array($entity->role->value, $account->getRoles())) {
+       switch ($operation) {
+          case 'view':
+            return AccessResult::allowed();
 
-    switch ($operation) {
-      case 'view':
-        return AccessResult::allowedIfHasPermission($account, 'view smile entity');
+          case 'update':
+            return AccessResult::allowed();
 
-      case 'update':
-        return AccessResult::allowedIfHasPermissions(
-          $account,
-          ['edit smile entity', 'administer smile entity'],
-          'OR',
-        );
+          case 'delete':
+            return AccessResult::allowed();
 
-      case 'delete':
-        return AccessResult::allowedIfHasPermissions(
-          $account,
-          ['delete smile entity', 'administer smile entity'],
-          'OR',
-        );
-
-      default:
-        // No opinion.
-        return AccessResult::neutral();
+          default:
+            // No opinion.
+            return AccessResult::neutral();
+       }
     }
-
+    return AccessResult::forbidden();
   }
 
   /**
