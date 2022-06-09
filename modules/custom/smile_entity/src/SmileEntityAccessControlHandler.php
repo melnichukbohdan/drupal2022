@@ -16,6 +16,11 @@ class SmileEntityAccessControlHandler extends EntityAccessControlHandler {
    * {@inheritdoc}
    */
   protected function checkAccess(EntityInterface $entity, $operation, AccountInterface $account) {
+
+    if ($account->id() == '1') {
+      return AccessResult::allowed();
+    }
+
     if (in_array($entity->role->value, $account->getRoles())) {
        switch ($operation) {
           case 'view':
