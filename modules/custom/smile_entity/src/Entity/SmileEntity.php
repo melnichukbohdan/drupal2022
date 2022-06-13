@@ -109,7 +109,7 @@ class SmileEntity extends ContentEntityBase implements SmileEntityInterface {
         'allowed_values' => $data
       ])
       ->setDisplayOptions('view', [
-        'label' => 'above',
+        'label' => 'hidden',
         'type' => 'string',
         'weight' => -2,
       ])
