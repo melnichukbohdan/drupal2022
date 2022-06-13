@@ -1,7 +1,0 @@
-block.settings.test_entity_block_example:
-  type: block_settings
-  label: 'Example block'
-  mapping:
-    foo:
-      type: string
-      label: Foo
