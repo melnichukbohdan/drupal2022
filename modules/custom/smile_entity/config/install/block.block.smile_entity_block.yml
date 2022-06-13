@@ -1,0 +1,20 @@
+
+status: true
+dependencies:
+  module:
+    - smile_entity
+  theme:
+    - bartik
+id: smile_entity_block
+theme: bartik
+region: sidebar_first
+weight: 1
+provider: null
+plugin: smile_entity_block
+settings:
+  id: smile_entity_block
+  label: 'Smile Entity Block'
+  provider: smile_entity_block
+  label_display: visible
+  items: 5
+visibility: {  }

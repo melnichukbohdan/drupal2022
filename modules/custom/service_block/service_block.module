@@ -5,7 +5,7 @@
  */
 function service_block_theme($existing, $type, $theme, $path) {
   return [
-    'block__service-block' => [
+    'block--service-block' => [
       'variables' => [
         'data' => [],
       ],

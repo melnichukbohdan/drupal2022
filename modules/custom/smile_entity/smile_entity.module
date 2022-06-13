@@ -15,8 +15,47 @@ function smile_entity_theme() {
     'smile_entity' => [
       'render element' => 'elements',
     ],
+//    'smile-entity' => [
+//      'variables' => [
+//        'build' => [],
+//      ],
+//    ],
   ];
 }
+
+///**
+// * Prepares variables for smile entity templates.
+// *
+// * Default template: smile-entity.html.twig.
+// *
+// * @param array $variables
+// *   An associative array containing:
+// *   - elements: An associative array containing the smile entity information and any
+// *     fields attached to the entity.
+// *   - attributes: HTML attributes for the containing element.
+// */
+//function template_preprocess_smile_entity(array &$variables) {
+//  $variables['view_mode'] = $variables['elements']['#view_mode'];
+//  foreach (Element::children($variables['elements']) as $key) {
+//    $variables['content'][$key] = $variables['elements'][$key];
+//  }
+
+
+//  /** @var Drupal\smile_entity\Entity\SmileEntity $entity */
+////  foreach ($variables['elements']['#smile_entity']['values'] as $key => $value) {
+////
+////    $variables['data'][$key] = $value;
+////  }
+//
+//  /** @var Drupal\smile_entity\Entity\SmileEntity $entity */
+//  $entity = $variables['elements']['#smile_entity'];
+//  //Set variables to template.
+//  $variables['label'] = $entity->label();
+//  $variables['url'] = $entity->toUrl()->toString();
+//  $variables['changed'] = \Drupal::service('date.formatter')->format($entity->getChangedTime(), 'short');
+//  $variables['body'] = $entity->get('body')->value;
+
+//}
 
 /**
  * Prepares variables for smile entity templates.
@@ -33,6 +72,10 @@ function template_preprocess_smile_entity(array &$variables) {
   $variables['view_mode'] = $variables['elements']['#view_mode'];
   foreach (Element::children($variables['elements']) as $key) {
     $variables['content'][$key] = $variables['elements'][$key];
+    //$variables['content']['id'] = $variables->
   }
-}
+    /** @var Drupal\smile_entity\Entity\SmileEntity $entity */
+  $entity = $variables['elements']['#smile_entity'];
+  $variables['url'] = $entity->toUrl()->toString();
 
+}
