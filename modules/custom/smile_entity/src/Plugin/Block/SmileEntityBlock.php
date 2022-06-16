@@ -93,6 +93,11 @@ class SmileEntityBlock extends BlockBase implements ContainerFactoryPluginInterf
 
     return[
       'elements' => $build,
+      '#cache' => [
+        'context' => [
+          'user.roles',
+        ],
+      ],
     ];
   }
 
