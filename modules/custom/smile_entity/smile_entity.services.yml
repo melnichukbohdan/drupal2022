@@ -1,0 +1,6 @@
+services:
+  smile_entity.event_subscriber:
+    class: Drupal\smile_entity\EventSubscriber\SmileEntitySubscriber
+    arguments: ['@current_route_match', '@current_user']
+    tags:
+      - { name: event_subscriber }
