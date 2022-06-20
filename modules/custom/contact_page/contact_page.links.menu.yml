@@ -1,0 +1,9 @@
+contact_page.form:
+  title: contact page form
+  discription: link menu Contact Page
+  route_name: contact_page.form
+  menu_name: main
+  weight: 4
+  options:
+    attributes:
+      target: _self

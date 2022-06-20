@@ -1,0 +1,15 @@
+contact_page.list:
+  path: '/contact-page/list'
+  defaults:
+    _title: 'My Contact Submission'
+    _controller: '\Drupal\contact_page\Controller\ContactPageController::build'
+  requirements:
+    _user_is_logged_in: 'TRUE'
+
+contact_page.form:
+  path: 'contact-page/form'
+  defaults:
+    _title: 'Contact page'
+    _form: 'Drupal\contact_page\Form\ContactPageForm'
+  requirements:
+    _permission: 'access content'

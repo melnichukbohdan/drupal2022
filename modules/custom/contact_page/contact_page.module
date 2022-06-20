@@ -1,0 +1,20 @@
+<?php
+
+/**
+ * Implements hook_mail_alter().
+ */
+function contact_page_mail_alter(&$message) {
+
+      $message['headers'] = [
+        'content-type' => 'text/html',
+        'from' => $message['params']['from'],
+        'reply-to' => $message['params']['from'],
+      ];
+      $message['from'] =$message['params']['from'];
+      $message['subject'] = t('Contact created: phone_number - @phone_number, selected category - @category', [
+        '@phone_number' => $message['params']['phone_number'],
+        '@category' => $message['params']['category'],
+      ]);
+      $message['body'][] = $message['params']['message'];
+
+}
