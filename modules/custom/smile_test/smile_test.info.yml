@@ -1,6 +1,6 @@
 name: Smile Test
 description: Entity API
-package: custom
+package: Custom
 type: module
 version: '1.0'
 

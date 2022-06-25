@@ -1,5 +1,5 @@
 name: Pets Owners Storage
 type: module
 description: Database Abstraction Layer / Drupal DB API
-package: custom
+package: Custom
 core_version_requirement: 9.x

@@ -1,5 +1,5 @@
 name: Youtube IFrame
 type: module
 description: example Drupal Plugin API
-package: custom
+package: Custom
 core_version_requirement: 9.x

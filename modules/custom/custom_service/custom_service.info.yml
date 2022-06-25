@@ -1,4 +1,4 @@
-name: custom_service
+name: Custom Service
 type: module
 description: Custom service Dependency Injection and Decorator
 package: Custom

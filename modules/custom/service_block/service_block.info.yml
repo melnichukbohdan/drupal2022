@@ -2,7 +2,7 @@ name: Service Block
 type: module
 description: Adding service block.
 core_version_requirement: 9.x
-package: custom
+package: Custom
 
 dependencies:
   - block

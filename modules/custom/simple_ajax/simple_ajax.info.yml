@@ -1,6 +1,6 @@
 name: Simle Ajax
 description: Ajax API
-package: custom
+package: Custom
 type: module
 
 core_version_requirement: 9.x
