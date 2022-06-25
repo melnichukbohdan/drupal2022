@@ -1,0 +1,7 @@
+login_only.settings_form:
+  path: '/admin/config/system/login-only'
+  defaults:
+    _title: 'Login Only settings'
+    _form: 'Drupal\login_only\Form\SettingsForm'
+  requirements:
+    _permission: 'administer login_only configuration'

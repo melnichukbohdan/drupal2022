@@ -1,0 +1,6 @@
+login_only.settings_form:
+  title: 'Login Only'
+  description: 'Configure Login Only mode.'
+  parent: system.admin_config_system
+  route_name: login_only.settings_form
+  weight: 10

@@ -1,0 +1,8 @@
+# Schema for the configuration files of the login_only module.
+login_only.settings:
+  type: config_object
+  label: 'login_only settings'
+  mapping:
+    login_only_mode:
+      type: boolean
+      label: 'Enable Login Only mode'
