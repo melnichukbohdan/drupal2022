@@ -1,0 +1,33 @@
+<?php
+
+use Drupal\Core\Cache\RefinableCacheableDependencyInterface;
+
+function login_only_menu_local_tasks_alter(&$data, $route_name, RefinableCacheableDependencyInterface &$cacheability) {
+
+  $сontactList = Drupal\Core\Url::fromRoute('contact_page.list');
+  $сontactForm = Drupal\Core\Url::fromRoute('contact_page.form');
+
+  if ($route_name == 'entity.user.canonical') {
+    $data['tabs'][0]['contact_page.list'] = [
+      '#theme' => 'menu_local_task',
+      '#link' => [
+        'title' => t('My Contacts'),
+        'url' => $сontactList,
+      ],
+    ];
+
+    $data['tabs'][0]['contact_page.form'] = [
+      '#theme' => 'menu_local_task',
+      '#link' => [
+        'title' => t('Contact page'),
+        'url' => $сontactForm,
+      ],
+    ];
+
+// The tab we're adding is dependent on a user's access to add content.
+    $cacheability
+      ->addCacheTags([
+        'user.permissions',
+      ]);
+  }
+}
