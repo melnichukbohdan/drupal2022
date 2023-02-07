@@ -1,0 +1,7 @@
+csv_import.settings_form:
+  path: '/admin/config/system/csv-import'
+  defaults:
+    _title: 'CSV Import settings'
+    _form: 'Drupal\csv_import\Form\CSVImportSettingsForm'
+  requirements:
+    _permission: 'administer csv_import configuration'

@@ -1,0 +1,6 @@
+csv_import.settings_form:
+  title: 'CSV Import'
+  description: 'Configure CSV Import.'
+  parent: system.admin_config_system
+  route_name: csv_import.settings_form
+  weight: 10
