@@ -108,7 +108,7 @@ class CSVImportSettingsForm extends ConfigFormBase {
       '#title' => $this->t('CSV file'),
       '#type' => 'managed_file',
       '#upload_location' => 'public://',
-      '#default_value' => $config->get('fid') ? [$config->get('fid')] : NULL,
+      '#default_value' => $config->get('file') ? [$config->get('file')] : NULL,
       '#upload_validators' => [
         'file_validate_extensions' =>['csv'],
       ],
@@ -116,8 +116,8 @@ class CSVImportSettingsForm extends ConfigFormBase {
     ];
 
     // if file downloaded show form element for import the file.
-    if (!empty($config->get('fid'))) {
-      $file = $this->entityTypeManager->getStorage('file')->load($config->get('fid')); //File::load($config->get('fid'));
+    if (!empty($config->get('file'))) {
+      $file = $this->entityTypeManager->getStorage('file')->load($config->get('file'));
       $created = $this->dateFormatter->format($file->getCreatedTime(), 'medium');
 
       $form['file_information'] = [
@@ -127,12 +127,14 @@ class CSVImportSettingsForm extends ConfigFormBase {
     }
 
     // Adds button for start importing file. The button have its own submit handler.
-    $form['actions']['start_import'] = [
-      '#type' => 'submit',
-      '#value' => $this->t('Start import'),
-      '#submit' => ['::startImport'],
-      '#weight' => 100,
-    ];
+     if ($config->get('file')) {
+       $form['actions']['start_import'] = [
+         '#type' => 'submit',
+         '#value' => $this->t('Start import'),
+         '#submit' => ['::startImport'],
+         '#weight' => 100,
+       ];
+     }
 
     $form['additional_settings'] = [
       '#type' => 'fieldset',
@@ -174,34 +176,8 @@ class CSVImportSettingsForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $config = $this->config('csv_import.settings');
 
-    // Saves file ID for the module config.
-    $fid_old = $config->get('fid');
-    $fid_form = array_shift($form_state->getValue('file'));
-
-    // Checks was file downloaded early and has different ID.
-    if (empty($fid_old) || $fid_old != $fid_form) {
-      if (!empty($fid_old)) {
-        $previous_file = $this->entityTypeManager->getStorage('file')->load($fid_old);
-        $this->fileUsage->delete($previous_file, 'csv_import', 'config_form', $previous_file->id());
-
-      }
-
-      $new_file = $this->entityTypeManager->getStorage('file')->load($fid_form);
-      $new_file->save();
-      $this->fileUsage->add($new_file, 'csv_import', 'config_form', $new_file->id());
-      $time = new DrupalDateTime('', 'UTC');
-
-      $config->set('fid', $fid_form)
-        ->set('creation', $time->getTimestamp());
-    }
-
-    $config->set('file', array_shift($form_state->getValue('file')))
-      ->set('skip_first_line', $form_state->getValue('skip_first_line'))
-      ->set('delimiter', $form_state->getValue('delimiter'))
-      ->save();
-
+    $this->saveHandler($form_state);
   }
 
   /**
@@ -213,12 +189,50 @@ class CSVImportSettingsForm extends ConfigFormBase {
    *   The current state of the form.
    */
   public function startImport(array &$form, FormStateInterface $form_state) {
+    $this->saveHandler($form_state);
+
     $config = $this->config('csv_import.settings');
-    $fileId = $config->get('fid');
+    $fileId = $config->get('file');
     $skip_first_line = $config->get('skip_first_line');
     $delimiter = $config->get('delimiter');
     $this->batch->parseCSV($fileId, $skip_first_line, $delimiter);
 
+  }
+
+  /**
+   * Saves new settings.
+   *
+   * @param FormStateInterface $form_state
+   *   The current state of the form.
+   */
+  public function saveHandler(FormStateInterface $form_state) {
+    $config = $this->config('csv_import.settings');
+
+    // Saves file ID for the module config.
+    $fid_old = $config->get('file');
+    $fid_form = array_shift($form_state->getValue('file'));
+
+    // Checks was file downloaded early and has different ID.
+    if (empty($fid_old) || $fid_old != $fid_form) {
+      if (!empty($fid_old)) {
+        $previous_file = $this->entityTypeManager->getStorage('file')->load($fid_old);
+        $this->fileUsage->delete($previous_file, 'csv_import', 'config_form', $previous_file->id());
+        $previous_file->delete();
+
+      }
+
+      $new_file = $this->entityTypeManager->getStorage('file')->load($fid_form);
+      $new_file->save();
+      $this->fileUsage->add($new_file, 'csv_import', 'config_form', $new_file->id());
+      $time = new DrupalDateTime('', 'UTC');
+
+      $config->set('file', $fid_form)
+        ->set('creation', $time->getTimestamp());
+    }
+
+    $config->set('skip_first_line', $form_state->getValue('skip_first_line'))
+      ->set('delimiter', $form_state->getValue('delimiter'))
+      ->save();
   }
 
 }
