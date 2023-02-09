@@ -1,0 +1,5 @@
+services:
+  csv_import.batch:
+    class: Drupal\csv_import\CSVImportBatch
+    arguments: ['@entity_type.manager', '@messenger']
+

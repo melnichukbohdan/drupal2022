@@ -2,12 +2,14 @@
 
 namespace Drupal\csv_import\Form;
 
+
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Datetime\DateFormatterInterface;
 use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\csv_import\CSVImportBatch;
 use Drupal\file\FileUsage\FileUsageInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -15,6 +17,34 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * Configure CSV Import settings.
  */
 class CSVImportSettingsForm extends ConfigFormBase {
+
+  /**
+   * The data formatter service.
+   *
+   * @var \Drupal\Core\Datetime\DateFormatterInterface
+   */
+  protected $dateFormatter;
+
+  /**
+   * The entity type manager service.
+   *
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+   */
+  protected $entityTypeManager;
+
+  /**
+   * The used file service.
+   *
+   * @var \Drupal\file\FileUsage\FileUsageInterface
+   */
+  protected $fileUsage;
+
+  /**
+   * The CSVImport batch service.
+   *
+   * @var \Drupal\csv_import\CSVImportBatch
+   */
+  protected $batch;
 
   /**
    * The Constructor for CSV Import Settings Form.
@@ -27,12 +57,14 @@ class CSVImportSettingsForm extends ConfigFormBase {
    *   The entity type manager service.
    * @param \Drupal\file\FileUsage\FileUsageInterface $file_usage
    *  The used file service.
+   * @param
    */
-  public function __construct(ConfigFactoryInterface $config_factory, DateFormatterInterface $date_formatter, EntityTypeManagerInterface $entity_type_manager, FileUsageInterface $file_usage) {
+  public function __construct(ConfigFactoryInterface $config_factory, DateFormatterInterface $date_formatter, EntityTypeManagerInterface $entity_type_manager, FileUsageInterface $file_usage, CSVImportBatch $batch) {
     parent::__construct($config_factory);
     $this->dateFormatter = $date_formatter;
     $this->entityTypeManager = $entity_type_manager;
     $this->fileUsage = $file_usage;
+    $this->batch = $batch;
 
   }
 
@@ -44,7 +76,8 @@ class CSVImportSettingsForm extends ConfigFormBase {
       $container->get('config.factory'),
       $container->get('date.formatter'),
       $container->get('entity_type.manager'),
-      $container->get('file.usage')
+      $container->get('file.usage'),
+      $container->get('csv_import.batch')
     );
 
   }
@@ -92,6 +125,14 @@ class CSVImportSettingsForm extends ConfigFormBase {
       ];
 
     }
+
+    // Adds button for start importing file. The button have its own submit handler.
+    $form['actions']['start_import'] = [
+      '#type' => 'submit',
+      '#value' => $this->t('Start import'),
+      '#submit' => ['::startImport'],
+      '#weight' => 100,
+    ];
 
     $form['additional_settings'] = [
       '#type' => 'fieldset',
@@ -160,6 +201,23 @@ class CSVImportSettingsForm extends ConfigFormBase {
       ->set('skip_first_line', $form_state->getValue('skip_first_line'))
       ->set('delimiter', $form_state->getValue('delimiter'))
       ->save();
+
+  }
+
+  /**
+   * Starts import data.
+   *
+   * @param array $form
+   *   An associative array containing the structure of the form.
+   * @param \Drupal\Core\Form\FormStateInterface $form_state
+   *   The current state of the form.
+   */
+  public function startImport(array &$form, FormStateInterface $form_state) {
+    $config = $this->config('csv_import.settings');
+    $fileId = $config->get('fid');
+    $skip_first_line = $config->get('skip_first_line');
+    $delimiter = $config->get('delimiter');
+    $this->batch->parseCSV($fileId, $skip_first_line, $delimiter);
 
   }
 
