@@ -193,9 +193,9 @@ class CSVImportSettingsForm extends ConfigFormBase {
 
     $config = $this->config('csv_import.settings');
     $fileId = $config->get('file');
-    $skip_first_line = $config->get('skip_first_line');
+    $skipFirstLine = $config->get('skip_first_line');
     $delimiter = $config->get('delimiter');
-    $this->batch->parseCSV($fileId, $skip_first_line, $delimiter);
+    $this->batch->parseCSV($fileId, $skipFirstLine, $delimiter);
 
   }
 
@@ -209,24 +209,24 @@ class CSVImportSettingsForm extends ConfigFormBase {
     $config = $this->config('csv_import.settings');
 
     // Saves file ID for the module config.
-    $fid_old = $config->get('file');
-    $fid_form = array_shift($form_state->getValue('file'));
+    $fidOld = $config->get('file');
+    $fidForm = array_shift($form_state->getValue('file'));
 
     // Checks was file downloaded early and has different ID.
-    if (empty($fid_old) || $fid_old != $fid_form) {
-      if (!empty($fid_old)) {
-        $previous_file = $this->entityTypeManager->getStorage('file')->load($fid_old);
-        $this->fileUsage->delete($previous_file, 'csv_import', 'config_form', $previous_file->id());
-        $previous_file->delete();
+    if (empty($fidOld) || $fidOld != $fidForm) {
+      if (!empty($fidOld)) {
+        $previousFile = $this->entityTypeManager->getStorage('file')->load($fidOld);
+        $this->fileUsage->delete($previousFile, 'csv_import', 'config_form', $previousFile->id());
+        $previousFile->delete();
 
       }
 
-      $new_file = $this->entityTypeManager->getStorage('file')->load($fid_form);
-      $new_file->save();
-      $this->fileUsage->add($new_file, 'csv_import', 'config_form', $new_file->id());
+      $newFile = $this->entityTypeManager->getStorage('file')->load($fidForm);
+      $newFile->save();
+      $this->fileUsage->add($newFile, 'csv_import', 'config_form', $newFile->id());
       $time = new DrupalDateTime('', 'UTC');
 
-      $config->set('file', $fid_form)
+      $config->set('file', $fidForm)
         ->set('creation', $time->getTimestamp());
     }
 

@@ -46,20 +46,21 @@ class CSVImportBatch extends Batch {
    *
    * @param integer $fileId
    *   The csv file id.
-   * @param boolean $skip_first_line
+   * @param boolean $skipFirstLine
    *   Skip the first line of the CSV file.
    * @param string $delimiter
    *   Delimiter for exploding data.
    */
-  public function parseCSV($fileId, $skip_first_line, $delimiter) {
+  public function parseCSV($fileId, $skipFirstLine, $delimiter) {
     $file = $this->entityTypeManager->getStorage('file')->load($fileId);
     $queue = [];
-    if (($csv = fopen($file->uri->getString(), 'r')) !== FALSE) {
-      if ($skip_first_line) {
+
+    if ($csv = fopen($file->get('uri')->getString(), 'r')) {
+      if ($skipFirstLine) {
         fgetcsv($csv, 0, $delimiter);
 
       }
-      while (($row = fgetcsv($csv, 0, $delimiter)) !== FALSE) {
+      while ($row = fgetcsv($csv, 0, $delimiter)) {
         $queue[] = $row;
 
       }
@@ -183,9 +184,9 @@ class CSVImportBatch extends Batch {
     }
 
     $values = [
-      'type'        => 'imported',
-      'title'       => $name,
-      'langcode'    => 'en',
+      'type' => 'imported',
+      'title' => $name,
+      'langcode' => 'en',
       'uid' => 1,
       'status' => 1,
       'body' => $body,
@@ -212,13 +213,6 @@ class CSVImportBatch extends Batch {
   }
 
   /**
-   * {@inheritdoc}
-   *
-   * Метод который будет вызван по окончанию всех batch операций, или в случае
-   * возникновения ошибки в процессе.
-   */
-
-  /**
    * Shows message after all batch operations.
    *
    * @param boolean $success
@@ -232,7 +226,7 @@ class CSVImportBatch extends Batch {
 
     }
     else {
-      $message = t('Finished with an error.');
+      $message = $this->t('Finished with an error.');
 
     }
 
